@@ -1,0 +1,158 @@
+[gd_scene load_steps=10 format=3 uid="uid://clkmoc5db3efq"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_btriq"]
+[ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="1_iy274"]
+[ext_resource type="Texture2D" uid="uid://c17dp3dqh8cic" path="res://assets/key.png" id="2_gd7ov"]
+[ext_resource type="Texture2D" uid="uid://0ds6lriuqe8c" path="res://assets/sounds on.png" id="3_5h3h4"]
+[ext_resource type="Texture2D" uid="uid://dotw76wvdmw0o" path="res://assets/sounds off.png" id="3_s6dpm"]
+[ext_resource type="Texture2D" uid="uid://gtlae1ffdvge" path="res://assets/music on.png" id="4_iusn1"]
+[ext_resource type="Texture2D" uid="uid://m1ug0avg37p4" path="res://assets/quit.png" id="5_1s785"]
+[ext_resource type="Texture2D" uid="uid://k84qqrhpcp6x" path="res://assets/music off.png" id="5_q4iia"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_62gys"]
+load_path = "res://.godot/imported/sounds on.png-565034580128157ba54195eea655c2f4.ctex"
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_btriq")
+sounds_on = ExtResource("3_5h3h4")
+sounds_off = ExtResource("3_s6dpm")
+music_on = ExtResource("4_iusn1")
+music_off = ExtResource("5_q4iia")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0980392, 0.156863, 1)
+
+[node name="HighScore" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 820.0
+offset_top = 30.0
+offset_right = 900.0
+offset_bottom = 215.0
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 128
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.5
+offset_top = -455.5
+offset_right = 349.5
+offset_bottom = 455.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 128
+text = "CATCH KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="KeyTexture" type="TextureRect" parent="VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_gd7ov")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 50
+text = "TAP TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SoundsButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("CompressedTexture2D_62gys")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 50
+text = "SOUNDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MusicButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_iusn1")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 50
+text = "MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("5_1s785")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iy274")
+theme_override_font_sizes/font_size = 50
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/SoundsButton" to="." method="_on_sounds_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer3/QuitButton" to="." method="_on_quit_button_pressed"]

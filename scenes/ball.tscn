@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqhi6h2mweetd"]
+
+[ext_resource type="Texture2D" uid="uid://bt0dhcldwlqkr" path="res://assets/circle.png" id="1_2tfqn"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_7hsdi"]
+[ext_resource type="Texture2D" uid="uid://drlmw8ssenovg" path="res://assets/ball.png" id="1_w0lvx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xltgd"]
+radius = 68.884
+
+[sub_resource type="Curve" id="Curve_l0n6b"]
+_data = [Vector2(0, 0.70428), 0.0, 0.0, 0, 0, Vector2(1, 0.177273), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ah05g"]
+colors = PackedColorArray(0.841806, 0.0739744, 0.204703, 1, 1, 1, 1, 0.501961)
+
+[sub_resource type="Animation" id="Animation_skjws"]
+resource_name = "capture"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crh7f"]
+_data = {
+"capture": SubResource("Animation_skjws")
+}
+
+[node name="Ball" type="CharacterBody2D"]
+script = ExtResource("1_7hsdi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w0lvx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xltgd")
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-80, 0)
+amount = 50
+lifetime = 0.7
+texture = ExtResource("1_2tfqn")
+emission_shape = 3
+emission_rect_extents = Vector2(60, 40)
+gravity = Vector2(-200, 0)
+scale_amount_min = 0.4
+scale_amount_curve = SubResource("Curve_l0n6b")
+color_ramp = SubResource("Gradient_ah05g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_crh7f")
+}

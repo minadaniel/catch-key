@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://r5v1xsyq7wqb"]
+
+[ext_resource type="Texture2D" uid="uid://dij8q6r0jxu22" path="res://assets/star.png" id="1_pbq7c"]
+[ext_resource type="Script" path="res://scripts/stars_effect.gd" id="2_5jhxe"]
+
+[sub_resource type="Gradient" id="Gradient_u8qyp"]
+offsets = PackedFloat32Array(0.00892857, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.521569)
+
+[node name="StarsEffect" type="CPUParticles2D"]
+position = Vector2(540, -50)
+emitting = false
+amount = 40
+lifetime = 1.5
+one_shot = true
+speed_scale = 1.5
+randomness = 0.2
+texture = ExtResource("1_pbq7c")
+emission_shape = 3
+emission_rect_extents = Vector2(540, 1)
+gravity = Vector2(0, 2000)
+angular_velocity_min = 100.0
+angular_velocity_max = 200.0
+color_ramp = SubResource("Gradient_u8qyp")
+script = ExtResource("2_5jhxe")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

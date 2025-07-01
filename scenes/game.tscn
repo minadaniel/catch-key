@@ -1,0 +1,206 @@
+[gd_scene load_steps=21 format=3 uid="uid://blpurpvffkrnb"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_4illm"]
+[ext_resource type="PackedScene" uid="uid://dqhi6h2mweetd" path="res://scenes/ball.tscn" id="1_rnw4u"]
+[ext_resource type="PackedScene" uid="uid://cnpg7bc4l2552" path="res://scenes/capture_effect.tscn" id="2_xbkt8"]
+[ext_resource type="PackedScene" uid="uid://ldyvtlt815ge" path="res://scenes/key.tscn" id="3_3olpe"]
+[ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="3_daep8"]
+[ext_resource type="PackedScene" uid="uid://r5v1xsyq7wqb" path="res://scenes/stars_effect.tscn" id="4_7twfh"]
+[ext_resource type="Texture2D" uid="uid://dtodxhfy0iv6p" path="res://assets/pause.png" id="4_uvq46"]
+[ext_resource type="Texture2D" uid="uid://bt0dhcldwlqkr" path="res://assets/circle.png" id="7_4iabk"]
+[ext_resource type="PackedScene" uid="uid://c1nd4s2l8ey2p" path="res://scenes/game_over.tscn" id="8_5lxf6"]
+[ext_resource type="PackedScene" uid="uid://cpu0wtp2il610" path="res://scenes/pause_screen.tscn" id="10_2vxp4"]
+[ext_resource type="PackedScene" uid="uid://5ytkdhhwjvm" path="res://scenes/failed_screen.tscn" id="11_dgdy7"]
+
+[sub_resource type="Gradient" id="Gradient_4lous"]
+colors = PackedColorArray(0.36959, 0.735495, 0.443126, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_l457u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/ScoreLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_eoijq"]
+resource_name = "key_caught"
+length = 0.3
+
+[sub_resource type="Animation" id="Animation_ffpwh"]
+resource_name = "speed_increase"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/ScoreLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/ScoreLabel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjjpj"]
+_data = {
+"RESET": SubResource("Animation_l457u"),
+"key_caught": SubResource("Animation_eoijq"),
+"speed_increase": SubResource("Animation_ffpwh")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rbvi"]
+size = Vector2(1060, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tw665"]
+size = Vector2(1060, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2e2v"]
+size = Vector2(20, 1900)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7sjq"]
+size = Vector2(20, 1900)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_4illm")
+capture_effect_scene = ExtResource("2_xbkt8")
+ball_scene = ExtResource("1_rnw4u")
+stars_effect = ExtResource("4_7twfh")
+bg_colors = Array[Color]([Color(0.0509804, 0.0980392, 0.156863, 1), Color(0.129412, 0.0509804, 0.156863, 1), Color(0.0509804, 0.117647, 0.156863, 1), Color(0.0509804, 0.156863, 0.145098, 1), Color(0.180392, 0.313726, 0.419608, 1), Color(0.270588, 0.388235, 0.2, 1), Color(0.196078, 0.0117647, 0.0862745, 1), Color(0.152941, 0.192157, 0.168627, 1), Color(0.196078, 0.0156863, 0.168627, 1), Color(0.0901961, 0.266667, 0.243137, 1)])
+
+[node name="BackgroundParticles" type="CPUParticles2D" parent="."]
+position = Vector2(540, 960)
+amount = 50
+lifetime = 5.0
+texture = ExtResource("7_4iabk")
+emission_shape = 3
+emission_rect_extents = Vector2(540, 960)
+gravity = Vector2(0, 10)
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_4lous")
+
+[node name="Key" parent="." instance=ExtResource("3_3olpe")]
+
+[node name="Ball" parent="." instance=ExtResource("1_rnw4u")]
+position = Vector2(540, 1470)
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 820.0
+offset_top = 30.0
+theme_override_fonts/font = ExtResource("3_daep8")
+theme_override_font_sizes/font_size = 128
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.5
+offset_top = -270.0
+offset_right = 76.5
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PauseButton" type="TextureButton" parent="HUD/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_uvq46")
+
+[node name="Label" type="Label" parent="HUD/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_daep8")
+theme_override_font_sizes/font_size = 50
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjjpj")
+}
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Walls"]
+position = Vector2(540, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D"]
+shape = SubResource("RectangleShape2D_6rbvi")
+
+[node name="Area2D2" type="Area2D" parent="Walls"]
+position = Vector2(540, 1920)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D2"]
+shape = SubResource("RectangleShape2D_tw665")
+
+[node name="Area2D3" type="Area2D" parent="Walls"]
+position = Vector2(0, 960)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D3"]
+shape = SubResource("RectangleShape2D_v2e2v")
+
+[node name="Area2D4" type="Area2D" parent="Walls"]
+position = Vector2(1080, 960)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D4"]
+shape = SubResource("RectangleShape2D_k7sjq")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("8_5lxf6")]
+offset = Vector2(0, -1920)
+transform = Transform2D(1, 0, 0, 1, 0, -1920)
+
+[node name="PauseScreen" parent="." instance=ExtResource("10_2vxp4")]
+offset = Vector2(0, -1920)
+transform = Transform2D(1, 0, 0, 1, 0, -1920)
+
+[node name="FailedScreen" parent="." instance=ExtResource("11_dgdy7")]
+offset = Vector2(0, -1920)
+transform = Transform2D(1, 0, 0, 1, 0, -1920)
+
+[connection signal="ball_entered" from="Key" to="." method="_on_key_ball_entered"]
+[connection signal="ball_exited" from="Key" to="." method="_on_key_ball_exited"]
+[connection signal="ball_exited_screen" from="Ball" to="." method="_on_ball_ball_exited_screen"]
+[connection signal="pressed" from="HUD/MarginContainer2/VBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="body_entered" from="Walls/Area2D" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Area2D2" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Area2D3" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Area2D4" to="." method="_on_wall_body_entered"]
+[connection signal="reload" from="GameOverScreen" to="." method="_reload"]
+[connection signal="ad_watched" from="FailedScreen" to="." method="_on_failed_screen_ad_watched"]
+[connection signal="reload" from="FailedScreen" to="." method="_reload"]

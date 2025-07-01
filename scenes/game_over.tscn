@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1nd4s2l8ey2p"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_i370c"]
+[ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="1_uj0qs"]
+[ext_resource type="Texture2D" uid="uid://dhlcudkj5fcsc" path="res://assets/reload.png" id="2_jw2g2"]
+[ext_resource type="Texture2D" uid="uid://8bvxvf40ncsb" path="res://assets/home.png" id="3_erp8k"]
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_i370c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0980392, 0.156863, 1)
+
+[node name="CurrentScore" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 820.0
+offset_top = 30.0
+theme_override_fonts/font = ExtResource("1_uj0qs")
+theme_override_font_sizes/font_size = 128
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uj0qs")
+theme_override_font_sizes/font_size = 128
+text = "GAME OVER!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uj0qs")
+theme_override_font_sizes/font_size = 64
+text = "HIGH SCORE: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ReloadButton" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_jw2g2")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uj0qs")
+theme_override_font_sizes/font_size = 50
+text = "RELOAD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HomeButton" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("3_erp8k")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uj0qs")
+theme_override_font_sizes/font_size = 50
+text = "HOME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2/HomeButton" to="." method="_on_home_button_pressed"]
