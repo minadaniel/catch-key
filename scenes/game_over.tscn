@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1nd4s2l8ey2p"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_i370c"]
+[ext_resource type="Script" uid="uid://1fk64x2uvhb1" path="res://scripts/game_over.gd" id="1_i370c"]
 [ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="1_uj0qs"]
 [ext_resource type="Texture2D" uid="uid://dhlcudkj5fcsc" path="res://assets/reload.png" id="2_jw2g2"]
 [ext_resource type="Texture2D" uid="uid://8bvxvf40ncsb" path="res://assets/home.png" id="3_erp8k"]

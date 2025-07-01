@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5ytkdhhwjvm"]
+[gd_scene load_steps=5 format=3 uid="uid://5ytkdhhwjvm"]
 
-[ext_resource type="Script" path="res://scripts/failed_screen.gd" id="1_kl0uy"]
+[ext_resource type="Script" uid="uid://cnkwv6c54bedd" path="res://scripts/failed_screen.gd" id="1_kl0uy"]
 [ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="1_pfjgm"]
-[ext_resource type="Texture2D" uid="uid://bkk2nx7b185sd" path="res://assets/watch ad.png" id="2_myet0"]
 [ext_resource type="Texture2D" uid="uid://dhlcudkj5fcsc" path="res://assets/reload.png" id="3_be50i"]
 [ext_resource type="Texture2D" uid="uid://8bvxvf40ncsb" path="res://assets/home.png" id="4_supin"]
-[ext_resource type="Script" path="res://admob-lib/admob.gd" id="6_3ybui"]
 
 [node name="FailedScreen" type="CanvasLayer"]
 script = ExtResource("1_kl0uy")
@@ -28,68 +26,44 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-offset_top = 517.0
-offset_right = 1080.0
-offset_bottom = 705.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = -364.0
+offset_right = 223.0
+offset_bottom = 364.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("1_pfjgm")
 theme_override_font_sizes/font_size = 128
 text = "FAILED!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-offset_top = 805.0
-offset_right = 1080.0
-offset_bottom = 1059.0
-
-[node name="WatchAdContainer" type="VBoxContainer" parent="CenterContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="WatchAdButton" type="TextureButton" parent="CenterContainer/WatchAdContainer"]
-layout_mode = 2
-texture_normal = ExtResource("2_myet0")
-stretch_mode = 3
-
-[node name="Label2" type="Label" parent="CenterContainer/WatchAdContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_pfjgm")
-theme_override_font_sizes/font_size = 50
-text = "CONTINUE ONE MORE TIME"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LoadingLabel" type="Label" parent="CenterContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_pfjgm")
-theme_override_font_sizes/font_size = 50
-text = "LOADING ...
-PLEASE WAIT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_top = 1157.0
-offset_right = 1080.0
-offset_bottom = 1403.0
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ReloadButton" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+[node name="ReloadButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_be50i")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_pfjgm")
 theme_override_font_sizes/font_size = 50
@@ -97,17 +71,17 @@ text = "RELOAD"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="HomeButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2"]
+[node name="HomeButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 texture_normal = ExtResource("4_supin")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_pfjgm")
 theme_override_font_sizes/font_size = 50
@@ -115,18 +89,5 @@ text = "HOME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdMob" type="Node" parent="."]
-script = ExtResource("6_3ybui")
-is_real = true
-rewarded_id = "ca-app-pub-7721511856995271/4086929529"
-
-[connection signal="pressed" from="CenterContainer/WatchAdContainer/WatchAdButton" to="." method="_on_watch_ad_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HomeButton" to="." method="_on_home_button_pressed"]
-[connection signal="rewarded" from="AdMob" to="." method="_on_ad_mob_rewarded"]
-[connection signal="rewarded_clicked" from="AdMob" to="." method="_on_ad_mob_rewarded_clicked"]
-[connection signal="rewarded_impression" from="AdMob" to="." method="_on_ad_mob_rewarded_impression"]
-[connection signal="rewarded_video_closed" from="AdMob" to="." method="_on_ad_mob_rewarded_video_closed"]
-[connection signal="rewarded_video_failed_to_load" from="AdMob" to="." method="_on_ad_mob_rewarded_video_failed_to_load"]
-[connection signal="rewarded_video_loaded" from="AdMob" to="." method="_on_ad_mob_rewarded_video_loaded"]
-[connection signal="rewarded_video_opened" from="AdMob" to="." method="_on_ad_mob_rewarded_video_opened"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/HomeButton" to="." method="_on_home_button_pressed"]

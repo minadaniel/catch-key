@@ -12,7 +12,7 @@ var game = preload("res://scenes/game.tscn")
 
 
 func _ready():
-	high_score.text = str(SavedData.data.high_score)
+	high_score.text = str(int(SavedData.data.high_score))
 	_set_sounds_settings()
 	_set_music_settings()
 

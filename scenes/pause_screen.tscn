@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cpu0wtp2il610"]
 
 [ext_resource type="FontFile" uid="uid://bh10rtrf7e7wf" path="res://assets/Jost-Medium.ttf" id="1_brf7u"]
-[ext_resource type="Script" path="res://scripts/pause_screen.gd" id="1_p44j1"]
+[ext_resource type="Script" uid="uid://b06swtr0h1qlj" path="res://scripts/pause_screen.gd" id="1_p44j1"]
 [ext_resource type="Texture2D" uid="uid://8bvxvf40ncsb" path="res://assets/home.png" id="3_8jpkc"]
 [ext_resource type="Texture2D" uid="uid://mhyckk3xfcgw" path="res://assets/resume.png" id="3_klcfx"]
 

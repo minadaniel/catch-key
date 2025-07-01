@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnpg7bc4l2552"]
 
 [ext_resource type="Texture2D" uid="uid://bt0dhcldwlqkr" path="res://assets/circle.png" id="1_qnvx4"]
-[ext_resource type="Script" path="res://scripts/capture_effect.gd" id="2_qs0nc"]
+[ext_resource type="Script" uid="uid://beec40pup1eqr" path="res://scripts/capture_effect.gd" id="2_qs0nc"]
 
 [node name="CaptureEffect" type="CPUParticles2D"]
 emitting = false

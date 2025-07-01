@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dqhi6h2mweetd"]
 
 [ext_resource type="Texture2D" uid="uid://bt0dhcldwlqkr" path="res://assets/circle.png" id="1_2tfqn"]
-[ext_resource type="Script" path="res://scripts/ball.gd" id="1_7hsdi"]
+[ext_resource type="Script" uid="uid://dfr7ep1tlallu" path="res://scripts/ball.gd" id="1_7hsdi"]
 [ext_resource type="Texture2D" uid="uid://drlmw8ssenovg" path="res://assets/ball.png" id="1_w0lvx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xltgd"]
@@ -32,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_crh7f"]
 _data = {
-"capture": SubResource("Animation_skjws")
+&"capture": SubResource("Animation_skjws")
 }
 
 [node name="Ball" type="CharacterBody2D"]
@@ -48,8 +48,8 @@ shape = SubResource("CircleShape2D_xltgd")
 show_behind_parent = true
 position = Vector2(-80, 0)
 amount = 50
-lifetime = 0.7
 texture = ExtResource("1_2tfqn")
+lifetime = 0.7
 emission_shape = 3
 emission_rect_extents = Vector2(60, 40)
 gravity = Vector2(-200, 0)
@@ -59,5 +59,5 @@ color_ramp = SubResource("Gradient_ah05g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_crh7f")
+&"": SubResource("AnimationLibrary_crh7f")
 }
